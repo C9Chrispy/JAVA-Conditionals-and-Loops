@@ -1,0 +1,71 @@
+import java.util.Random;
+
+
+public class Drunkard {
+	public double RandomWalker(int steps) {
+		double[] location = {0.0, 0.0};
+		double direction = 0.0;
+		double distance = 0;
+		Random rand = new Random();
+		for (int i = 0; i < steps; i++) {
+			direction = rand.nextInt(4);
+			if (direction == 0) {
+				location[1] += 1;
+			}
+			if (direction == 1) {
+				location[0] += 1;
+			}
+			if (direction == 2) {
+				location[1] += -1;
+			}
+			if (direction == 3) {
+				location[0] += -1;
+			}
+			//System.out.println(Arrays.toString(location));
+		}
+		distance = (location[0]*location[0]) + (location[1]*location[1]);
+		//System.out.print(distance);
+		return distance;
+	}
+	public double RandomWalkers(int step1, int step2) {
+		double direction = 0.0;
+		double[] distances = new double[step2];
+		Random rand = new Random();
+		double totalDist = 0;
+		for (int i = 0; i < step2; i++) {
+			double[] location = {0.0, 0.0};
+			double distance = 0;
+			for (int j = 0; j < step1; j++) {
+				direction = rand.nextInt(4);
+				if (direction == 0) {
+					location[1] += 1;
+				}
+				if (direction == 1) {
+					location[0] += 1;
+				}
+				if (direction == 2) {
+					location[1] += -1;
+				}
+				if (direction == 3) {
+					location[0] += -1;
+				}
+				// System.out.println(Arrays.toString(location));
+			}
+			distance = (location[0]*location[0]) + (location[1]*location[1]);
+			distances[i] = distance;
+		}
+		for (int i = 0; i < distances.length; i++) {
+			totalDist += distances[i];
+			// System.out.println(distances[i]);
+		}
+		double rmsdist = totalDist/step2;
+		// System.out.println(rmsdist);
+		return rmsdist;
+	}
+	public static void main(String[] args) {
+		Drunkard walk1 = new Drunkard();
+		int step1 = 200;
+		int step2 = 100000;
+		walk1.RandomWalkers(step1, step2);
+	}
+}
