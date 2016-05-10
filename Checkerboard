@@ -1,0 +1,29 @@
+
+
+public class Checkerboard {
+	public String BoardBuilder(int dimension) {
+		if (dimension < 0) {
+			throw new IllegalArgumentException("Dimension must be positive");
+		}
+		int n = dimension;
+		String realBoard = "";
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				realBoard += "* ";
+			}
+			if ((i % 2) != 0) {
+				realBoard += System.lineSeparator() + " ";
+			}
+			else {
+				realBoard += System.lineSeparator();
+			}
+		}
+		System.out.println(realBoard);
+		return realBoard;
+	}
+	public static void main(String[] args) {
+		Checkerboard ch = new Checkerboard();
+		int dim = 25;
+		ch.BoardBuilder(dim);
+	}
+}
