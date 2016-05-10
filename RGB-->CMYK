@@ -1,0 +1,34 @@
+import java.util.Arrays;
+
+
+public class RGB2CMYK {
+	public double[] RGBtoCMYK(int red, int green, int blue) {
+		if (red < 0 || green < 0 || blue < 0 || red > 255 || green >255 || blue > 255) {
+			throw new IllegalArgumentException("RGB values must be between 0 and 255 inclusive");
+		}
+		double[] CMYK = new double[4];
+		double redd = (double) red;
+		double greend = (double) green;
+		double blued = (double) blue;
+		double[] white = {redd/255, greend/255, blued/255};
+		Arrays.sort(white);
+		double maxWhite = white[2];
+		// cyan
+		CMYK[0] = (maxWhite-(redd/255))/maxWhite;
+		// magenta
+		CMYK[1] = (maxWhite - (greend/255))/maxWhite;
+		// yellow
+		CMYK[2] = (maxWhite-(blued/255))/maxWhite;
+		// black
+		CMYK[3] = 1-maxWhite;
+		//System.out.println(Arrays.toString(CMYK));
+		return CMYK;
+	}
+	public static void main(String[] args) {
+		RGB2CMYK colors = new RGB2CMYK();
+		int red = 75;
+		int green = 0;
+		int blue = 130;
+		colors.RGBtoCMYK(red, green, blue);
+	}
+}
